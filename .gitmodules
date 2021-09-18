@@ -1,0 +1,3 @@
+[submodule "Api_MyLogin"]
+	path = Api_MyLogin
+	url = https://github.com/kamum/Api_MyLogin
