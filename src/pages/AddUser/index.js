@@ -57,7 +57,7 @@ export const AddUser = () => {
             <Link to="/users">Usuários</Link><br />
 
             <h1>Cadastrar Usuário</h1>
-            <Link to="/users">Listar</Link><br/>
+            <Link to="/users"><button type="button">Listar</button></Link><br/><hr/>
 
             {status.type === 'error' ? <p>{status.mensagem}</p> : ""}
             {status.type === 'success' ?

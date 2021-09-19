@@ -96,7 +96,7 @@ export const EditUser = (props) => {
 
             <h1>Editar Usuário</h1>
 
-            <Link to="/users">Listar</Link><br/>
+            <Link to="/users"><button type="button">Listar</button></Link><br/>
 
             {status.type === 'warning' ? 
                 <Redirect to={{
