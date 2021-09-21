@@ -12,3 +12,6 @@ Realizar chamada para API
 
 Ultilizado para muda de página e renderizar a nova página sem recarregar toda a aplicação
 ### npm install --save history
+
+validação dos campos
+### npm install --save yup

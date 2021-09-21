@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 
-import {Menu} from '../../Components/Menu'
-
 import api from '../../config/configApi';
 
-
-export const AddUser = () => {
+export const AddUserLogin = () => {
 
     const [user, setUser] = useState({
         name: '',
@@ -29,65 +26,43 @@ export const AddUser = () => {
 
         const headers = {
             'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Content-Type': 'application/json'
             }
         };
 
-        await api.post('/user', user, headers)
-            .then((response) => {
-                setStatus({
-                    type: 'success',
-                    mensagem: response.data.mensagem
-                });
-            }).catch((err) => {
-                if (err.response) {
-                    setStatus({
-                        type: 'error',
-                        mensagem: err.response.data.mensagem
-                    });
-                } else {
-                    setStatus({
-                        type: 'error',
-                        mensagem: 'Erro: Tente novamente.'
-                    });
-                }
+        await api.post('/add-user-login', user, headers)
+        .then((response) => {
+            setStatus({
+                type: 'redSuccess',
+                mensagem: response.data.mensagem
             });
-    };
-
-    /*function validate(){
-        if(!user.name) return setStatus({
-            type: 'error',
-            mensagem: "Erro: necessário preencher o campo nome!"
-        });
-        if(!user.email) return setStatus({
-            type: 'error',
-            mensagem: "Erro: necessário preencher o campo email!"
-        });
-        if(!user.password) return setStatus({
-            type: 'error',
-            mensagem: "Erro: necessário preencher o campo senha!"
-        });
-        if(user.password.length < 6) return setStatus({
-            type: 'error',
-            mensagem: "Erro: A senha deve ter no mínimo 6 caracteres!"
+        }).catch((err) => {
+            if (err.response) {
+                setStatus({
+                    type: 'error',
+                    mensagem: err.response.data.mensagem
+                });
+            } else {
+                setStatus({
+                    type: 'error',
+                    mensagem: "Erro: Tente novamente mais tarde!"
+                });
+            }
         });
 
-        return true;
-    }*/
+    }    
 
     async function validate() {
         let schema = yup.object().shape({
-
             password: yup.string("Erro: Necessário preencher o campo senha!")
                 .required("Erro: Necessário preencher o campo senha!")
                 .min(6, "Erro: A senha deve ter no mínimo 6 caracteres!"),
-            email: yup.string("Erro: Necessário preencher o campo email!")
-                .required("Erro: Necessário preencher o campo email!"),
+            email: yup.string("Erro: Necessário preencher o campo e-mail!")
+                .email("Erro: Necessário preencher o campo e-mail!")
+                .required("Erro: Necessário preencher o campo e-mail!"),
             name: yup.string("Erro: Necessário preencher o campo nome!")
                 .required("Erro: Necessário preencher o campo nome!")
-
-        })
+        });
 
         try {
             await schema.validate({
@@ -97,7 +72,6 @@ export const AddUser = () => {
             });
             return true;
         } catch (err) {
-
             setStatus({
                 type: 'error',
                 mensagem: err.errors
@@ -108,15 +82,12 @@ export const AddUser = () => {
 
     return (
         <div>
-            <Menu/>
-
             <h1>Cadastrar Usuário</h1>
-            <Link to="/users"><button type="button">Listar</button></Link><br /><hr />
 
             {status.type === 'error' ? <p>{status.mensagem}</p> : ""}
-            {status.type === 'success' ?
+            {status.type === 'redSuccess' ?
                 <Redirect to={{
-                    pathname: '/users',
+                    pathname: '/',
                     state: {
                         type: "success",
                         mensagem: status.mensagem
@@ -136,8 +107,11 @@ export const AddUser = () => {
 
                 * Campo obrigatório<br /><br />
 
-                <button type="submit">Cadastrar</button>
+                <button type="submit">Cadastrar</button><br /><br />
             </form>
+
+            <Link to="/">Login</Link>
+
         </div>
     );
 };

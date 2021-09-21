@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
 import { serverDeleteUser } from '../../services/serverDeleteUser';
+import {Menu} from '../../Components/Menu'
 
 import api from '../../config/configApi';
 
@@ -80,13 +81,14 @@ export const ViewUser = (props) => {
 
     return (
         <div>
-            <Link to="/dashboard">Dashboard</Link><br />
-            <Link to="/users">Usuários</Link><br />
+            
+            <Menu />
 
             <h1>Informações do Usuário</h1>
 
             <Link to="/users"><button type="button">Listar</button></Link>{' '}
             <Link to={"/edit-user/ " + data.id}><button type="button">Editar</button></Link>{' '}
+            <Link to={"/edit-user-password/ " + data.id}><button type="button">Editar senha</button></Link>{' '}
             <Link to={"#"}><button type="button" onClick={() => deleteUser(data.id)}>Apagar</button></Link>{' '}
 
             {status.type === 'redSuccess' ? 

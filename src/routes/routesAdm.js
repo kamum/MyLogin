@@ -9,6 +9,11 @@ import {Users} from '../pages/Users';
 import {AddUser} from '../pages/AddUser';
 import {ViewUser} from '../pages/ViewUser';
 import { EditUser} from '../pages/EditUser';
+import { EditUserPassword} from '../pages/EditUserPassword';
+import { ViewProfile} from '../pages/ViewProfile';
+import { EditProfile} from '../pages/EditProfile';
+import { EditProfilePassword} from '../pages/EditProfilePassword';
+import { AddUserLogin} from '../pages/AddUserLogin'
 
 
 
@@ -26,11 +31,17 @@ export default function RoutesAdm() {
     return (
         <Switch>
             <CustomRoute exact path="/" component={Login} />
-            <CustomRoute isPrivate path="/dashboard" component={Dashboard} />
-            <CustomRoute isPrivate path="/users" component={Users} />
-            <CustomRoute isPrivate path="/add-user" component={AddUser} />
-            <CustomRoute isPrivate path="/view-user/:id" component={ViewUser} />
-            <CustomRoute isPrivate path="/edit-user/:id" component={EditUser} />
+            <CustomRoute exact path="/add-user-login" component={AddUserLogin} />
+            
+            <CustomRoute exact isPrivate path="/dashboard" component={Dashboard} />
+            <CustomRoute exact isPrivate path="/users" component={Users} />
+            <CustomRoute exact isPrivate path="/add-user" component={AddUser} />
+            <CustomRoute exact isPrivate path="/view-user/:id" component={ViewUser} />
+            <CustomRoute exact isPrivate path="/view-profile" component={ViewProfile} />
+            <CustomRoute exact isPrivate path="/edit-user/:id" component={EditUser} />
+            <CustomRoute exact isPrivate path="/edit-user-password/:id" component={EditUserPassword} />
+            <CustomRoute exact isPrivate path="/edit-profile" component={EditProfile} />
+            <CustomRoute exact isPrivate path="/edit-profile-password" component={EditProfilePassword} />
         </Switch>
     )
 }

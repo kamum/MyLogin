@@ -6,10 +6,11 @@ import {Menu} from '../../Components/Menu'
 
 import {Link, Redirect} from 'react-router-dom'
 
-export const EditUser = (props) => {
+export const EditUserPassword = (props) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [id] = useState(props.match.params.id);
 
     const [status, setStatus] = useState({
@@ -29,7 +30,7 @@ export const EditUser = (props) => {
             }
         }
         
-        await api.put('/user', {id, name, email}, headers)
+        await api.put('/user-senha/', {id, password }, headers)
         .then((response) => {
             setStatus({
                 type: 'success',
@@ -97,17 +98,15 @@ export const EditUser = (props) => {
 
     async function validate() {
         let schema = yup.object().shape({
-            email: yup.string("Erro: Necessário preencher o campo email!")
-                .required("Erro: Necessário preencher o campo email!"),
-            name: yup.string("Erro: Necessário preencher o campo nome!")
-                .required("Erro: Necessário preencher o campo nome!")
 
+            password: yup.string("Erro: Necessário preencher o campo senha!")
+                .required("Erro: Necessário preencher o campo senha!")
+                .min(6, "Erro: A senha deve ter no mínimo 6 caracteres!"),
         })
 
         try {
             await schema.validate({
-                name,
-                email,
+                password,
             });
             return true;
         } catch (err) {
@@ -117,13 +116,13 @@ export const EditUser = (props) => {
             });
             return false;
         }
-    }
+    }    
 
     return (
         <div>
             <Menu />
 
-            <h1>Editar Usuário</h1>
+            <h1>Editar senha do usuário</h1>
 
             <Link to="/users"><button type="button">Listar</button></Link><br/>
 
@@ -151,11 +150,12 @@ export const EditUser = (props) => {
 
             <hr />
             <form onSubmit={editUser}>
-                <label>Nome*:</label>
-                <input type="text" name="name" placeholder="Nome Completo Do usuário" value={name} onChange={text => setName(text.target.value)}/><br/><br/>
+
+                <label>Nome:{name}</label><br/>
+                <label>Email:{email}</label><br/><br/>
                 
-                <label>Email*:</label>
-                <input type="email" name="email" placeholder="Informe o email" value={email} onChange={text => setEmail(text.target.value)}/><br/><br/>
+                <label>Password*:</label>
+                <input type="password" name="password" placeholder="password" autoComplete="on" onChange={text => setPassword(text.target.value)}/><br/><br/>
                 
                 * Campo obrigatório<br /><br />
 

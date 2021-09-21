@@ -6,12 +6,11 @@ import {Menu} from '../../Components/Menu'
 
 import {Link, Redirect} from 'react-router-dom'
 
-export const EditUser = (props) => {
+export const EditProfile = () => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [id] = useState(props.match.params.id);
-
+    
     const [status, setStatus] = useState({
         type: '',
         mensagem: ''
@@ -29,7 +28,7 @@ export const EditUser = (props) => {
             }
         }
         
-        await api.put('/user', {id, name, email}, headers)
+        await api.put('/edit-profile', { name, email }, headers)
         .then((response) => {
             setStatus({
                 type: 'success',
@@ -66,7 +65,7 @@ export const EditUser = (props) => {
                 }
             }
 
-            await api.get("/user/" + id, headers)
+            await api.get("/view-profile", headers)
                 .then((response) => {
                     if (response.data.user) {
                         setName(response.data.user.name)
@@ -93,7 +92,7 @@ export const EditUser = (props) => {
                 })
         }
         getUser();
-    }, [id])
+    }, [])
 
     async function validate() {
         let schema = yup.object().shape({
@@ -123,13 +122,13 @@ export const EditUser = (props) => {
         <div>
             <Menu />
 
-            <h1>Editar Usuário</h1>
+            <h1>Editar Perfil</h1>
 
-            <Link to="/users"><button type="button">Listar</button></Link><br/>
+            <Link to="/view-profile"><button type="button">Perfil</button></Link><br/>
 
             {status.type === 'warning' ? 
                 <Redirect to={{
-                    pathname: '/users',
+                    pathname: '/login',
                     state: {
                         type: "error",
                         mensagem: status.mensagem
@@ -139,7 +138,7 @@ export const EditUser = (props) => {
 
             {status.type === 'success' ? 
                 <Redirect to={{
-                    pathname: '/users',
+                    pathname: '/view-profile',
                     state: {
                         type: 'success',
                         mensagem: status.mensagem

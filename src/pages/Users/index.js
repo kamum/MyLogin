@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { serverDeleteUser } from '../../services/serverDeleteUser';
 import api from '../../config/configApi';
 
+import {Menu} from '../../Components/Menu'
+
 import { Link, useLocation } from 'react-router-dom'
 
 export const Users = () => {
@@ -77,8 +79,7 @@ export const Users = () => {
     return (
         <>
 
-            <Link to="/dashboard">Dashboard</Link><br />
-            <Link to="/users">Usuários</Link><br />
+            <Menu />
 
             <h1>Listar Usuário</h1>
 
