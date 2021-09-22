@@ -110,8 +110,7 @@ export const AddUserLogin = () => {
                 <button type="submit">Cadastrar</button><br /><br />
             </form>
 
-            <Link to="/">Login</Link>
-
+            Retorne para a página de <Link to="/">login</Link>
         </div>
     );
 };

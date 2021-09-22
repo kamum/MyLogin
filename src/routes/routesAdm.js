@@ -14,6 +14,7 @@ import { ViewProfile} from '../pages/ViewProfile';
 import { EditProfile} from '../pages/EditProfile';
 import { EditProfilePassword} from '../pages/EditProfilePassword';
 import { AddUserLogin} from '../pages/AddUserLogin'
+import {RecoverPassword} from '../pages/RecoverPassword'
 
 
 
@@ -32,6 +33,7 @@ export default function RoutesAdm() {
         <Switch>
             <CustomRoute exact path="/" component={Login} />
             <CustomRoute exact path="/add-user-login" component={AddUserLogin} />
+            <CustomRoute exact path="/recover-password" component={RecoverPassword} />
             
             <CustomRoute exact isPrivate path="/dashboard" component={Dashboard} />
             <CustomRoute exact isPrivate path="/users" component={Users} />
