@@ -9,6 +9,7 @@ export const ViewProfile = () => {
     const { state} = useLocation();
     
     const [data, setData] = useState('');
+    const [addressImage, setAddressImage] = useState('');
 
     const [status, setStatus] = useState({
         type: state ? state.type : "",
@@ -28,6 +29,7 @@ export const ViewProfile = () => {
             await api.get("/view-profile", headers)
                 .then((response) => {
                     if (response.data.user) {
+                        setAddressImage(response.data.addressImage);
                         setData(response.data.user);
                     } else {
                         setStatus({
@@ -61,6 +63,7 @@ export const ViewProfile = () => {
             <h1>Meu Perfil</h1>   
             <Link to="/edit-profile"><button type="button">Editar Perfil</button></Link>{" "}
             <Link to="/edit-profile-password"><button type="button">Editar senha</button></Link><br/>      
+            <Link to="/edit-profile-image"><button type="button">Editar Imagem</button></Link><br/>      
 
             {status.type === 'redError' ?
                 <Redirect to={{
@@ -75,6 +78,7 @@ export const ViewProfile = () => {
             <hr />
             
             <span>{data.id}</span><br />
+            <span>{<img src={addressImage} alt="Imagem do usuário" width="150" height="150"/>}</span><br />
             <span>{data.name}</span><br />
             <span>{data.email}</span><br />
         </div>

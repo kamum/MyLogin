@@ -9,6 +9,7 @@ import api from '../../config/configApi';
 export const ViewUser = (props) => {
     
     const [data, setData] = useState('')
+    const [addressImage, setAddressImage] = useState('');
 
     const [id] = useState(props.match.params.id);
     
@@ -30,6 +31,7 @@ export const ViewUser = (props) => {
             await api.get("/user/" + id, headers)
             .then((response) => {
                 if(response.data.user) {
+                    setAddressImage(response.data.addressImage);
                     setData(response.data.user)
                 }else {
                     setStatus ({
@@ -113,6 +115,7 @@ export const ViewUser = (props) => {
             {status.type === 'success' ? <p>{status.mensagem}</p> : ""}
             <hr/>    
             <span>{data.id}</span><br/>
+            <span>{<img src={addressImage} alt="Imagem do usuário" width="150" height="150"/>}</span><br />
             <span>{data.name}</span><br/>
             <span>{data.email}</span><br/>
 

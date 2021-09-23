@@ -16,6 +16,7 @@ import { EditProfilePassword} from '../pages/EditProfilePassword';
 import { AddUserLogin} from '../pages/AddUserLogin';
 import {RecoverPassword} from '../pages/RecoverPassword';
 import {UpdatePassword} from '../pages/UpdatePassword';
+import {EditProfileImage} from '../pages/EditProfileImage';
 
 
 
@@ -46,6 +47,7 @@ export default function RoutesAdm() {
             <CustomRoute exact isPrivate path="/edit-user-password/:id" component={EditUserPassword} />
             <CustomRoute exact isPrivate path="/edit-profile" component={EditProfile} />
             <CustomRoute exact isPrivate path="/edit-profile-password" component={EditProfilePassword} />
+            <CustomRoute exact isPrivate path="/edit-profile-image" component={EditProfileImage} />
         </Switch>
     )
 }
