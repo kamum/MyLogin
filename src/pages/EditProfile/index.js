@@ -30,6 +30,7 @@ export const EditProfile = () => {
         
         await api.put('/edit-profile', { name, email }, headers)
         .then((response) => {
+            localStorage.setItem('name', name);
             setStatus({
                 type: 'success',
                 mensagem: response.data.mensagem
